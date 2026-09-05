@@ -111,6 +111,16 @@ export function Studio() {
           </div>
         </Reveal>
 
+        <FramedPhoto
+          src="/images/studio-workshop.jpg"
+          alt="The Heaven Furniture Mart workshop in Agrabad — workbenches, hand tools and stacked timber in warm daylight"
+          width={1896}
+          height={830}
+          aspect="aspect-[16/7]"
+          caption="Our Agrabad workshop"
+          className="mt-16"
+        />
+
         <ul className="mt-16 grid gap-px overflow-hidden border border-border bg-border sm:grid-cols-2">
           {trustPoints.map((t, i) => (
             <Reveal
@@ -262,12 +272,22 @@ export function Beliefs() {
   return (
     <section id="beliefs" className="border-t border-border">
       <div className="mx-auto max-w-[1400px] px-6 py-24 lg:px-12 lg:py-32">
-        <Reveal className="max-w-2xl">
-          <p className="eyebrow">{beliefs.eyebrow}</p>
-          <h2 className="mt-6 text-[clamp(2.1rem,4.6vw,3.5rem)] tracking-[-0.02em]">
-            {beliefs.heading}
-          </h2>
-        </Reveal>
+        <div className="grid gap-10 lg:grid-cols-[1fr_0.85fr] lg:items-center lg:gap-16">
+          <Reveal>
+            <p className="eyebrow">{beliefs.eyebrow}</p>
+            <h2 className="mt-6 text-[clamp(2.1rem,4.6vw,3.5rem)] tracking-[-0.02em]">
+              {beliefs.heading}
+            </h2>
+          </Reveal>
+          <FramedPhoto
+            src="/images/beliefs-joinery.jpg"
+            alt="A hand-cut mortise-and-tenon joint in teak being test-fitted, a marking gauge and bench chisel on the workbench"
+            width={1122}
+            height={1402}
+            aspect="aspect-[4/5]"
+            caption="Hand-cut joinery"
+          />
+        </div>
         <ul className="mt-14 grid gap-px overflow-hidden border border-border bg-border sm:grid-cols-3">
           {beliefs.items.map((b, i) => (
             <Reveal
