@@ -229,23 +229,18 @@ export const studio = {
   heading: "A workshop, not a warehouse",
   body: [
     "Heaven Furniture Mart designs, builds and styles furniture for homes and offices in Chattogram. Nothing here is pulled off a shelf.",
-    "We measure your room, agree the wood and the finish with you, then build it by hand in our own workshop — and fit it in place when it's done.",
+    "Every piece is designed and built by hand in our own Agrabad workshop — for one room and one client.",
   ],
 };
 
+// The three hero marks (free consultation, delivery & fitting, easy payments)
+// aren't repeated here — this grid carries what the visitor doesn't already
+// know from the top of the page.
 export const trustPoints = [
-  {
-    title: "Free design consultation",
-    note: "We start with your room, your measurements, your brief.",
-  },
-  { title: "Fully bespoke", note: "Built to your space and taste — never mass-produced." },
-  {
-    title: "Premium materials",
-    note: "Quality wood and skilled in-house craftsmanship.",
-  },
+  { title: "Fully bespoke", note: "Built to your room and taste — never mass-produced." },
+  { title: "Premium materials", note: "Quality hardwoods and skilled in-house craftsmanship." },
   { title: "Large Agrabad showroom", note: "See and sit on the work before you commit." },
-  { title: "Delivery & installation", note: "Included, fitted in place by our own team." },
-  { title: "Easy payment options", note: "Arranged with you once the design is agreed." },
+  { title: "Delivery & installation", note: "Fitted in place by our own team." },
 ];
 
 // Timber the workshop builds in, and where it comes from — a compact strip
@@ -282,15 +277,15 @@ export const beliefs = {
   items: [
     {
       t: "Measured, then made",
-      d: "We start with your room and your measurements. Nothing is drawn to a catalogue size.",
+      d: "We start from your room and your measurements — never a catalogue size.",
     },
     {
       t: "Wood that ages well",
-      d: "Solid timber and honest joinery — chosen for how it looks in ten years, not on delivery day.",
+      d: "Solid timber and honest joinery, chosen for how it looks in ten years.",
     },
     {
       t: "Finished in place",
-      d: "We deliver and fit every piece ourselves. The job isn't done until it sits right in the room.",
+      d: "We deliver and fit every piece ourselves — it isn't done until it sits right.",
     },
   ],
 };
@@ -342,7 +337,7 @@ export const bespoke = {
 export const howItWorks = {
   eyebrow: "How it works",
   heading: "Built to your space, not to a catalogue",
-  body: "You tell us the room, the size and the taste. We draw it, agree the wood and finish with you, build it in our own workshop, and fit it in place. Delivery and installation are part of the job.",
+  body: "Four steps from your room to a finished piece — the consultation is free, delivery and fitting included.",
   steps: [
     {
       n: "01",

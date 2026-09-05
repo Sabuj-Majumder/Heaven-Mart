@@ -104,7 +104,7 @@ export function Studio() {
           </div>
         </Reveal>
 
-        <ul className="mt-16 grid gap-px overflow-hidden border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-16 grid gap-px overflow-hidden border border-border bg-border sm:grid-cols-2">
           {trustPoints.map((t, i) => (
             <Reveal
               as="li"
