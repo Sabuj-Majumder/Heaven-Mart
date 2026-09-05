@@ -58,9 +58,16 @@ function FramedPhoto({
   caption: string;
   className?: string;
 }) {
+  // Its own observer, so the photo uncovers on its own beat rather than
+  // fading in with the surrounding text block. See .framed-photo in styles.css.
+  const { ref, shown } = useReveal<HTMLDivElement>();
   return (
-    <div className={`group border border-border/70 p-2 ${className}`}>
-      <div className="overflow-hidden">
+    <div
+      ref={ref}
+      data-shown={shown ? "true" : "false"}
+      className={`framed-photo group border border-border/70 p-2 ${className}`}
+    >
+      <div className="photo-frame overflow-hidden">
         <img
           src={src}
           alt={alt}
@@ -71,7 +78,7 @@ function FramedPhoto({
           className={`w-full object-cover object-top transition-transform duration-[1200ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03] ${aspect}`}
         />
       </div>
-      <div className="mt-2 flex items-center gap-3 px-1 pb-0.5">
+      <div className="photo-caption mt-2 flex items-center gap-3 px-1 pb-0.5">
         <span aria-hidden="true" className="rule-hair flex-1" />
         <span className="shrink-0 text-[0.6rem] uppercase tracking-[0.24em] text-muted-foreground">
           {caption}
@@ -291,8 +298,8 @@ export function HowItWorks() {
   return (
     <section id="how" className="border-t border-border bg-[var(--surface)]">
       <div className="mx-auto max-w-[1400px] px-6 py-24 lg:px-12 lg:py-36">
-        <Reveal className="grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-20">
-          <div>
+        <div className="grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-20">
+          <Reveal>
             <p className="eyebrow">{howItWorks.eyebrow}</p>
             <h2 className="mt-6 text-[clamp(2.2rem,5vw,4rem)] leading-[1.03] tracking-[-0.02em]">
               Built to your space,
@@ -305,7 +312,7 @@ export function HowItWorks() {
             <div className="mt-10">
               <CtaButton />
             </div>
-          </div>
+          </Reveal>
           <FramedPhoto
             src={howItWorks.image}
             alt={howItWorks.alt}
@@ -314,7 +321,7 @@ export function HowItWorks() {
             aspect="aspect-[16/11]"
             caption="In the workshop"
           />
-        </Reveal>
+        </div>
 
         <ol className="mt-20 grid gap-px overflow-hidden border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
           {howItWorks.steps.map((s) => (
@@ -487,7 +494,7 @@ export function Proof() {
           <p className="mt-8 text-sm tracking-wide text-muted-foreground">{proof.line}</p>
         </Reveal>
 
-        <Reveal className="mt-16 grid gap-12 lg:grid-cols-2 lg:items-center lg:gap-20">
+        <div className="mt-16 grid gap-12 lg:grid-cols-2 lg:items-center lg:gap-20">
           <FramedPhoto
             src={proof.image}
             alt={proof.alt}
@@ -496,7 +503,7 @@ export function Proof() {
             aspect="aspect-[16/10]"
             caption="Agrabad Access Road"
           />
-          <div>
+          <Reveal>
             <p className="eyebrow">The showroom</p>
             <h3 className="mt-5 text-[clamp(1.9rem,4vw,3rem)] tracking-[-0.02em]">
               Visit us in Agrabad
@@ -519,8 +526,8 @@ export function Proof() {
                 View on map
               </QuietLink>
             </div>
-          </div>
-        </Reveal>
+          </Reveal>
+        </div>
 
         <ol className="mt-16 border-t border-border pt-14 lg:flex lg:items-start">
           {proof.milestones.map((m, i) => (

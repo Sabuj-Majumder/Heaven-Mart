@@ -30,5 +30,5 @@ export function useReveal<T extends HTMLElement = HTMLDivElement>(threshold = 0.
     return () => io.disconnect();
   }, [threshold]);
 
-  return { ref, className: shown ? "reveal reveal-in" : "reveal" };
+  return { ref, shown, className: shown ? "reveal reveal-in" : "reveal" };
 }

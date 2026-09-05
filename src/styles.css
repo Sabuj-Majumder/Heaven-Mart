@@ -211,6 +211,25 @@
   will-change: transform;
 }
 
+/* Framed photos uncover left-to-right as they enter view — a print being
+   revealed, not just faded in. Driven by data-shown (own IntersectionObserver
+   in FramedPhoto), independent of the surrounding text's reveal. */
+.framed-photo .photo-frame {
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 1100ms var(--ease-quiet);
+  will-change: clip-path;
+}
+.framed-photo .photo-caption {
+  opacity: 0;
+  transition: opacity 700ms var(--ease-quiet) 600ms;
+}
+.framed-photo[data-shown="true"] .photo-frame {
+  clip-path: inset(0 0 0 0);
+}
+.framed-photo[data-shown="true"] .photo-caption {
+  opacity: 1;
+}
+
 /* Faint film grain so large dark fields read as depth, not flat colour. */
 @utility grain {
   position: relative;
@@ -233,6 +252,13 @@
     opacity: 1 !important;
     transform: none !important;
   }
+  /* data-shown never flips without JS — show the photo, not a clipped blank. */
+  .framed-photo .photo-frame {
+    clip-path: none !important;
+  }
+  .framed-photo .photo-caption {
+    opacity: 1 !important;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -241,6 +267,14 @@
     animation: none !important;
     opacity: 1;
     transform: none;
+  }
+  .framed-photo .photo-frame {
+    clip-path: none !important;
+    transition: none !important;
+  }
+  .framed-photo .photo-caption {
+    opacity: 1 !important;
+    transition: none !important;
   }
 }
 
