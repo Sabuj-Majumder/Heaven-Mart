@@ -1,0 +1,234 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Heaven Furniture Mart design system.
+ * Palette: deep charcoal-teal ground, warm ivory, brass accent, walnut tan.
+ * Type: Cormorant Garamond (display serif) + Jost (geometric sans).
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 2px);
+  --radius-xl: calc(var(--radius) + 6px);
+
+  --font-display: "Cormorant Garamond", "Iowan Old Style", Georgia, serif;
+  --font-sans: "Jost", ui-sans-serif, system-ui, sans-serif;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ivory: var(--ivory);
+  --color-brass: var(--brass);
+  --color-walnut: var(--walnut);
+  --color-espresso: var(--espresso);
+  --color-surface: var(--surface);
+}
+
+:root {
+  --radius: 2px;
+
+  /* Grounding dark: charcoal with a teal cast — a showroom at dusk, not black. */
+  --background: oklch(0.201 0.017 189);
+  --surface: oklch(0.247 0.017 189);
+  /* Warm ivory: paper-warm so it never reads clinical against brass. */
+  --ivory: oklch(0.938 0.013 84);
+  --foreground: var(--ivory);
+  /* Muted brass drawn from the logo — accent only, never a field colour. */
+  --brass: oklch(0.751 0.095 82);
+  /* Natural walnut tan for material-led accents. */
+  --walnut: oklch(0.612 0.079 57);
+  /* Deep brown for grounding on ivory panels. */
+  --espresso: oklch(0.269 0.037 55);
+
+  --card: var(--surface);
+  --card-foreground: var(--ivory);
+  --popover: var(--surface);
+  --popover-foreground: var(--ivory);
+  --primary: var(--brass);
+  --primary-foreground: oklch(0.209 0.032 55);
+  --secondary: oklch(0.27 0.017 189);
+  --secondary-foreground: var(--ivory);
+  --muted: oklch(0.27 0.017 189);
+  /* Lightened for WCAG AA body copy on the charcoal ground. */
+  --muted-foreground: oklch(0.8 0.014 84);
+  --accent: var(--walnut);
+  --accent-foreground: var(--ivory);
+  --destructive: oklch(0.577 0.183 27);
+  --destructive-foreground: var(--ivory);
+  --border: oklch(0.938 0.013 84 / 14%);
+  --input: oklch(0.938 0.013 84 / 20%);
+  --ring: var(--brass);
+
+  --hairline: 1px solid var(--border);
+  --ease-quiet: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Keep anchored section headings clear of the fixed header. */
+  section[id] {
+    scroll-margin-top: 5.5rem;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    font-weight: 300;
+    letter-spacing: 0.01em;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  blockquote {
+    font-family: var(--font-display);
+    font-weight: 300;
+    letter-spacing: -0.015em;
+    line-height: 1.05;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--brass);
+    outline-offset: 3px;
+  }
+
+  ::selection {
+    background: var(--brass);
+    color: var(--primary-foreground);
+  }
+}
+
+@utility eyebrow {
+  font-size: 0.6875rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--brass);
+  font-weight: 400;
+}
+
+@utility rule-hair {
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    color-mix(in oklab, var(--brass) 55%, transparent),
+    transparent
+  );
+}
+
+/* A brass line that draws in under a link on hover — the one recurring
+   interactive signature, used anywhere a text link needs a hover state. */
+@utility underline-grow {
+  background-image: linear-gradient(var(--brass), var(--brass));
+  background-position: 0% 100%;
+  background-repeat: no-repeat;
+  background-size: 0% 1px;
+  transition: background-size 450ms var(--ease-quiet);
+}
+
+/* Quiet scroll reveal — the only motion pattern on the page. */
+@utility reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 900ms var(--ease-quiet),
+    transform 900ms var(--ease-quiet);
+  will-change: opacity, transform;
+}
+
+@utility reveal-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* Headline lines that rise from behind a clipping edge on entrance —
+   the hero's one considered flourish. Driven by data-shown on an ancestor. */
+.line-clip {
+  display: block;
+  overflow: hidden;
+  /* room for descenders so the mask doesn't shave the y/g/j */
+  padding-bottom: 0.08em;
+}
+.line-clip > .line-rise {
+  display: block;
+  transform: translateY(115%);
+  transition: transform 780ms var(--ease-quiet);
+  will-change: transform;
+}
+[data-shown="true"] .line-clip > .line-rise {
+  transform: translateY(0);
+}
+
+/* Faint film grain so large dark fields read as depth, not flat colour. */
+@utility grain {
+  position: relative;
+}
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.55;
+  mix-blend-mode: soft-light;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E");
+}
+
+/* If JS never runs, never hide the SSR'd content. */
+@media (scripting: none) {
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .line-clip > .line-rise {
+    transform: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .line-clip > .line-rise {
+    transform: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
