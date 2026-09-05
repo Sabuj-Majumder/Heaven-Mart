@@ -3,7 +3,6 @@ import { Phone } from "lucide-react";
 import { CtaButton } from "@/components/CtaButton";
 import { ConfigStage } from "@/components/three/ConfigStage";
 import { configStore, useConfig } from "@/lib/config-store";
-import { useMountReveal } from "@/hooks/use-reveal";
 import { brand, configAlt, finishes, hero, pieces, sizes } from "@/content/site";
 
 function Pill({
@@ -58,15 +57,10 @@ export function Hero() {
     [pieceLabel, finishLabel, activeSize.label],
   );
 
-  // A brief, considered arrival on first paint — not scroll-triggered, since
-  // the hero is already on screen. Reduced-motion and no-JS safe (see
-  // useMountReveal / the .reveal + .line-rise fallbacks in styles.css).
-  const eyebrowReveal = useMountReveal(0);
-  const headingReveal = useMountReveal(0);
-  const ledeReveal = useMountReveal(220);
-  const ctaReveal = useMountReveal(340);
-  const marksReveal = useMountReveal(460);
-
+  // The entrance is pure CSS (see .hero-rise / .line-rise in styles.css) so it
+  // plays on first paint rather than waiting for hydration. The staggered
+  // animation-delay values below choreograph the arrival; reduced-motion and
+  // no-JS both land on the content fully visible.
   return (
     <section id="top" className="grain relative min-h-[100svh] overflow-hidden pt-24">
       <p className="sr-only" aria-live="polite">
@@ -76,33 +70,30 @@ export function Hero() {
       <div className="mx-auto grid w-full max-w-[1400px] grid-cols-1 gap-10 px-6 pb-16 pt-4 lg:min-h-[calc(100svh-6rem)] lg:grid-cols-[0.92fr_1.08fr] lg:items-start lg:gap-x-16 lg:px-12 lg:pt-10">
         {/* LEFT — message, CTA, credentials */}
         <div className="relative z-10 order-1 flex max-w-xl flex-col">
-          <p className={`eyebrow ${eyebrowReveal.className}`} style={eyebrowReveal.style}>
+          <p className="eyebrow hero-rise" style={{ animationDelay: "0ms" }}>
             {hero.eyebrow}
           </p>
-          <h1
-            className="mt-6 text-[clamp(2.6rem,8vw,5.5rem)] leading-[0.98] tracking-[-0.02em]"
-            data-shown={headingReveal.shown ? "true" : "false"}
-          >
+          <h1 className="mt-6 text-[clamp(2.6rem,8vw,5.5rem)] leading-[0.98] tracking-[-0.02em]">
             <span className="line-clip">
-              <span className="line-rise" style={{ transitionDelay: "40ms" }}>
+              <span className="line-rise" style={{ animationDelay: "40ms" }}>
                 Furniture,
               </span>
             </span>
             <span className="line-clip">
-              <span className="line-rise" style={{ transitionDelay: "130ms" }}>
+              <span className="line-rise" style={{ animationDelay: "130ms" }}>
                 crafted <em className="not-italic text-primary">around you</em>
               </span>
             </span>
           </h1>
           <p
-            className={`mt-6 max-w-md text-base leading-relaxed text-foreground/90 sm:text-lg ${ledeReveal.className}`}
-            style={ledeReveal.style}
+            className="mt-6 max-w-md text-base leading-relaxed text-foreground/90 hero-rise sm:text-lg"
+            style={{ animationDelay: "220ms" }}
           >
             {hero.lede}
           </p>
           <div
-            className={`mt-9 flex flex-wrap items-center gap-x-8 gap-y-3 ${ctaReveal.className}`}
-            style={ctaReveal.style}
+            className="mt-9 flex flex-wrap items-center gap-x-8 gap-y-3 hero-rise"
+            style={{ animationDelay: "340ms" }}
           >
             <CtaButton size="lg" />
             <a
@@ -115,7 +106,7 @@ export function Hero() {
               </span>
             </a>
           </div>
-          <div className={`mt-10 ${marksReveal.className}`} style={marksReveal.style}>
+          <div className="mt-10 hero-rise" style={{ animationDelay: "460ms" }}>
             <span aria-hidden="true" className="rule-hair block w-14" />
             <p className="mt-4 flex flex-wrap gap-y-1 text-[0.7rem] uppercase tracking-[0.2em] text-muted-foreground">
               {hero.marks.map((m, i) => (

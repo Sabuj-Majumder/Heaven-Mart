@@ -171,8 +171,34 @@
   transform: none;
 }
 
+/* The hero's entrance — pure CSS so it plays on first paint, not after
+   hydration. Each element starts from the keyframe's `from` state (held during
+   its animation-delay via `both`) and settles visible. */
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.hero-rise {
+  animation: hero-rise 900ms var(--ease-quiet) both;
+  will-change: opacity, transform;
+}
+
 /* Headline lines that rise from behind a clipping edge on entrance —
-   the hero's one considered flourish. Driven by data-shown on an ancestor. */
+   the hero's one considered flourish. */
+@keyframes line-rise {
+  from {
+    transform: translateY(115%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
 .line-clip {
   display: block;
   overflow: hidden;
@@ -181,12 +207,8 @@
 }
 .line-clip > .line-rise {
   display: block;
-  transform: translateY(115%);
-  transition: transform 780ms var(--ease-quiet);
+  animation: line-rise 780ms var(--ease-quiet) both;
   will-change: transform;
-}
-[data-shown="true"] .line-clip > .line-rise {
-  transform: translateY(0);
 }
 
 /* Faint film grain so large dark fields read as depth, not flat colour. */
@@ -204,20 +226,21 @@
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E");
 }
 
-/* If JS never runs, never hide the SSR'd content. */
+/* If JS never runs, never hide the SSR'd content. The hero entrance is pure
+   CSS, so it still plays here; the scroll reveals below need JS, so unhide. */
 @media (scripting: none) {
   .reveal {
     opacity: 1 !important;
     transform: none !important;
   }
-  .line-clip > .line-rise {
-    transform: none !important;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .hero-rise,
   .line-clip > .line-rise {
-    transform: none !important;
+    animation: none !important;
+    opacity: 1;
+    transform: none;
   }
 }
 
