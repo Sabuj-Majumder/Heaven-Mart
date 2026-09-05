@@ -15,9 +15,9 @@ Built for the **RACDOX Hackathon** as a real-world client project for
 | ------------------ | ------------------------------------------------------------------------ |
 | **Event**          | RACDOX Hackathon                                                        |
 | **Client / Brief** | Heaven Furniture Mart — conversion-focused brand site                    |
-| **Live demo**      | _https://your-deployed-url_                                             |
-| **Team**           | _your name / team members_                                              |
-| **Submission date**| _add date_                                                             |
+| **Live demo**      | <https://heaven-mart.sabujmajumder100.workers.dev/>                     |
+| **Team**           | Sabuj Majumder                                                          |
+| **Submission date**| 06.09.2026                                                             |
 | **Built with**     | TanStack Start · React 19 · Tailwind v4 · three.js · Cloudflare Workers  |
 
 ---
