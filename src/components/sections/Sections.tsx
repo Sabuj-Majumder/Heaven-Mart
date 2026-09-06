@@ -272,22 +272,26 @@ export function Beliefs() {
   return (
     <section id="beliefs" className="border-t border-border">
       <div className="mx-auto max-w-[1400px] px-6 py-24 lg:px-12 lg:py-32">
-        <div className="grid gap-10 lg:grid-cols-[1fr_0.85fr] lg:items-center lg:gap-16">
-          <Reveal>
-            <p className="eyebrow">{beliefs.eyebrow}</p>
-            <h2 className="mt-6 text-[clamp(2.1rem,4.6vw,3.5rem)] tracking-[-0.02em]">
-              {beliefs.heading}
-            </h2>
-          </Reveal>
-          <FramedPhoto
-            src="/images/beliefs-joinery.jpg"
-            alt="A hand-cut mortise-and-tenon joint in teak being test-fitted, a marking gauge and bench chisel on the workbench"
-            width={1122}
-            height={1402}
-            aspect="aspect-[4/5]"
-            caption="Hand-cut joinery"
-          />
-        </div>
+        {/* Header — centred and compact so it reads as a section intro */}
+        <Reveal className="mx-auto max-w-2xl text-center">
+          <p className="eyebrow">{beliefs.eyebrow}</p>
+          <h2 className="mt-6 text-[clamp(2.1rem,4.6vw,3.5rem)] tracking-[-0.02em]">
+            {beliefs.heading}
+          </h2>
+        </Reveal>
+
+        {/* Cinematic image strip — wide and shallow, no dead space */}
+        <FramedPhoto
+          src="/images/beliefs-joinery.jpg"
+          alt="A hand-cut mortise-and-tenon joint in teak being test-fitted, a marking gauge and bench chisel on the workbench"
+          width={1400}
+          height={525}
+          aspect="aspect-[8/3]"
+          caption="Hand-cut joinery"
+          className="mt-14"
+        />
+
+        {/* Three value cards — same 3-col grid that now matches the visual width above */}
         <ul className="mt-14 grid gap-px overflow-hidden border border-border bg-border sm:grid-cols-3">
           {beliefs.items.map((b, i) => (
             <Reveal

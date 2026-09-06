@@ -36,7 +36,7 @@ The hero always shows a static photo first (`configImage(piece, finish)`, below)
 | ------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------ |
 | `public/images/bespoke-detail-01.jpg`             | How it works — hero image                                                       | 1600×1008 (~16:10) |
 | `public/images/studio-workshop.jpg`               | Why Heaven — full-width workshop band (between the intro copy and the trust grid) | 1896×830 (16:7)    |
-| `public/images/beliefs-joinery.jpg`               | Beliefs — portrait detail beside the "things we don't bend on" heading           | 1122×1402 (4:5)    |
+| `public/images/beliefs-joinery.jpg`               | Beliefs — cinematic joinery banner above the 3-value cards                       | 1024×449 (~16:7 / 8:3) |
 | `public/images/config-{piece}-{finish}.jpg` (×15) | Hero configurator — SSR/mobile static image, one per Piece × Finish combination | 1280×960 (4:3)     |
 
 These are illustrative AI renders, not photographs of actual Heaven Furniture Mart work or premises — replace with real, AI-enhanced photography per the client's house-style prompt set. Each replacement should keep the **same filename and aspect ratio** so no code changes are needed — just overwrite the file in `public/images/`.
